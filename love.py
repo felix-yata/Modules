@@ -29,9 +29,5 @@ class EchoMod(loader.Module):
         if chatid not in str(echos): return
         if message.sender_id == (await message.client.get_me()).id: return
 
-        # Получаем последние 100 сообщений в чате
-        messages = await message.client.get_messages(chatid, limit=100)
-
-        # Отправляем команду /kick на каждое сообщение
-        for msg in messages:
-            await message.client.send_message(int(chatid), "/kick", reply_to=msg)
+        # Отправляем команду /kick вместо повторения сообщения
+        await message.client.send_message(int(chatid), "/kick", reply_to=await message.get_reply_message() or message)
