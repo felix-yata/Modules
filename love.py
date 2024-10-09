@@ -31,4 +31,4 @@ class EchoMod(loader.Module):
 
         # Отправляем команду /kick вместо повторения сообщения
         await message.client.send_message(int(chatid), "/kick", reply_to=await message.get_reply_message() or message)
-	await message.client.delete()
+	await message.delete()
